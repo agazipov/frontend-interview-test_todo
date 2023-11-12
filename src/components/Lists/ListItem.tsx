@@ -3,13 +3,11 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 /* APPLICATION */
-import edit from "../icons/edit.svg";
-import remove from "../icons/remove.svg";
-import { selectAllCategories } from "../features/categoriesSlice";
-import { ModalEditItem } from "../Modal/ModalEditItem";
-import { ModalRemoveItem } from "../Modal/ModalRemoveItem";
-import { useIsModal, useModalActiv } from "../context/modal";
-import { ITask } from "../types/types";
+import edit from "../../icons/edit.svg";
+import remove from "../../icons/remove.svg";
+import { selectAllCategories } from "../../redux/features/categoriesSlice";
+import { useModalActiv } from "../../context/modal";
+import { ITask } from "../../types/types";
 
 interface ListItemProps {
   item: {
@@ -20,10 +18,9 @@ interface ListItemProps {
   };
 }
 
-export const ListItem: React.FC<ListItemProps> = ({ item }: {item: ITask}) => {
+export const ListItem = ({ item }: {item: ITask}) => {
   const categories = useSelector(selectAllCategories);
   const modalActiv = useModalActiv();
-  const [removeModalActive, setRemoveModalActive] = useState(false);
 
   return (
     <>
@@ -45,25 +42,17 @@ export const ListItem: React.FC<ListItemProps> = ({ item }: {item: ITask}) => {
         <div className="list-item-col2">
           <button
             className="list-item-col2__btn"
-            onClick={() => modalActiv(item)}
+            onClick={() => modalActiv({item, type: "edit"})}
           >
             <img src={edit} alt="edit" />
           </button>
           <button
             className="list-item-col2__btn"
-            onClick={() => {
-              setRemoveModalActive(true);
-            }}
+            onClick={() => modalActiv({item, type: "remove"})}
           >
             <img src={remove} alt="remove" />
           </button>
         </div>
-
-        {/* <ModalRemoveItem
-          item={item}
-          active={removeModalActive}
-          setActive={setRemoveModalActive}
-        /> */}
       </li>
     </>
   );

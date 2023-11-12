@@ -1,8 +1,8 @@
-import important from "../icons/important.svg";
+import important from "../../../icons/important.svg";
 
 interface ModalInputProps {
   name: string | undefined;
-  setName: any;
+  setName: (e: string) => void;
   size?: string;
 }
 

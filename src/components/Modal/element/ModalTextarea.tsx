@@ -1,6 +1,6 @@
 interface ModalTextareaProps {
   description: string;
-  setDescription: React.Dispatch<React.SetStateAction<string>>;
+  setDescription: (e: string) => void;
 }
 
 export const ModalTextarea: React.FC<ModalTextareaProps> = ({

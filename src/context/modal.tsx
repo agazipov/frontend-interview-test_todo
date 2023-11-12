@@ -5,11 +5,16 @@ import React, {
     useState,
   } from "react";
 import { ITask } from "../types/types";
+
+interface IWrapperTask {
+  type: string,
+  item: ITask
+}
   
   const defaultValue = null;
   
-  const context = React.createContext<ITask | null>(defaultValue);
-  const setterContext = React.createContext((payload: ITask | null) => {});
+  const context = React.createContext<IWrapperTask | null>(defaultValue);
+  const setterContext = React.createContext((payload: IWrapperTask | null) => {});
   
   export const useIsModal = () => {
     return useContext(context);
@@ -20,9 +25,9 @@ import { ITask } from "../types/types";
   };
   
   export const ModalContext = ({children}: {children: ReactNode}) => {
-    const [isModal, setIsMobile] = useState<ITask | null>(defaultValue);
+    const [isModal, setIsMobile] = useState<IWrapperTask | null>(defaultValue);
   
-    const modalVisible = useCallback((payload: ITask | null) => {
+    const modalVisible = useCallback((payload: IWrapperTask | null) => {
       setIsMobile(payload);
     }, []);
   

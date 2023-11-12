@@ -3,9 +3,9 @@ import { ModalDropdown } from "./ModalDropdown";
 
 interface ModalRowProps {
   name: string;
-  setName: React.Dispatch<React.SetStateAction<string>>;
-  selected: string | undefined;
-  setSelected: React.Dispatch<React.SetStateAction<string>>;
+  setName: (e:string) => void;
+  selected: string  | undefined;
+  setSelected: (e:string | undefined) => void;
 }
 
 export const ModalRow: React.FC<ModalRowProps> = ({
@@ -14,6 +14,7 @@ export const ModalRow: React.FC<ModalRowProps> = ({
   selected,
   setSelected,
 }) => {
+  
   return (
     <div className="modal__content_row">
       <ModalInput name={name} setName={setName} />
