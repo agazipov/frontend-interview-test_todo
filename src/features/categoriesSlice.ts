@@ -11,7 +11,7 @@ export interface CategoriesState {
   description: string;
 }
 
-const initialState: CategoriesState[] = [
+const initialState: Array<CategoriesState> = [
   {
     id: "d485a644-5a24-4f55-b3f7-a083338be879",
     name: "Категория",

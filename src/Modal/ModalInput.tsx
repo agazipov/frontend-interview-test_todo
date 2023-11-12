@@ -1,8 +1,8 @@
 import important from "../icons/important.svg";
 
 interface ModalInputProps {
-  name: string;
-  setName: React.Dispatch<React.SetStateAction<string>>;
+  name: string | undefined;
+  setName: any;
   size?: string;
 }
 

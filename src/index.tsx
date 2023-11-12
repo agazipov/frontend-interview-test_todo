@@ -9,6 +9,7 @@ import { store } from "./app/store";
 import App from "./App";
 //import reportWebVitals from './reportWebVitals';
 import "./index.css";
+import { ModalContext } from "./context/modal";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -17,7 +18,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <ModalContext>
+          <App />
+        </ModalContext>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>
