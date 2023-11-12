@@ -8,21 +8,10 @@ import { ModalText } from "../element/ModalText";
 import { ModalFooter } from "../element/ModalFooter";
 import { tasksRemoved, tasksClearedCategories } from "../../../redux/features/tasksSlice";
 import { categoriesRemoved } from "../../../redux/features/categoriesSlice";
-import { ITask } from "../../../types/types";
+import { IListItem } from "../../../types/types";
 import { useModalActiv } from "../../../context/modal";
 
-interface ModalRemoveItemProps {
-  item: {
-    id: string;
-    name: string;
-    description: string;
-    category?: string;
-  };
-  active: boolean;
-  setActive: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export const ModalRemoveItem = ({ item }: { item: ITask }) => {
+export const ModalRemoveItem: React.FC<IListItem> = ({ item }) => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const isCategories = pathname.includes("categories");

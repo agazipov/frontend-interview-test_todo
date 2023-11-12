@@ -4,12 +4,9 @@ import React from "react";
 /* APPLICATION */
 import "./Modal.css";
 import { useModalActiv } from "../../context/modal";
+import { IModalProps } from "../../types/types";
 
-interface ModalProps {
-  children: React.ReactNode;
-}
-
-export const ModalWrapper: React.FC<ModalProps> = ({
+export const ModalWrapper: React.FC<IModalProps> = ({
   children,
 }) => {
   const modalActiv = useModalActiv();

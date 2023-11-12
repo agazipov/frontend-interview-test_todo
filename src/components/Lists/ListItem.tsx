@@ -1,5 +1,4 @@
 /* VENDOR */
-import { useState } from "react";
 import { useSelector } from "react-redux";
 
 /* APPLICATION */
@@ -7,18 +6,9 @@ import edit from "../../icons/edit.svg";
 import remove from "../../icons/remove.svg";
 import { selectAllCategories } from "../../redux/features/categoriesSlice";
 import { useModalActiv } from "../../context/modal";
-import { ITask } from "../../types/types";
+import { IListItem } from "../../types/types";
 
-interface ListItemProps {
-  item: {
-    id: string;
-    name: string;
-    description: string;
-    category?: string;
-  };
-}
-
-export const ListItem = ({ item }: {item: ITask}) => {
+export const ListItem: React.FC<IListItem> = ({ item }) => {
   const categories = useSelector(selectAllCategories);
   const modalActiv = useModalActiv();
 
@@ -42,13 +32,13 @@ export const ListItem = ({ item }: {item: ITask}) => {
         <div className="list-item-col2">
           <button
             className="list-item-col2__btn"
-            onClick={() => modalActiv({item, type: "edit"})}
+            onClick={() => modalActiv({ item, type: "edit" })}
           >
             <img src={edit} alt="edit" />
           </button>
           <button
             className="list-item-col2__btn"
-            onClick={() => modalActiv({item, type: "remove"})}
+            onClick={() => modalActiv({ item, type: "remove" })}
           >
             <img src={remove} alt="remove" />
           </button>

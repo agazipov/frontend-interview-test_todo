@@ -11,10 +11,10 @@ import { ModalTextarea } from "../element/ModalTextarea";
 import { ModalFooter } from "../element/ModalFooter";
 import { tasksUpdated } from "../../../redux/features/tasksSlice";
 import { categoriesUpdated } from "../../../redux/features/categoriesSlice";
-import { ITask } from "../../../types/types";
+import { IListItem, ITask } from "../../../types/types";
 import { useModalActiv } from "../../../context/modal";
 
-export const ModalEditItem = ({ item }: { item: ITask}) => {
+export const ModalEditItem: React.FC<IListItem> = ({ item }) => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const isCategories = pathname.includes("categories");
