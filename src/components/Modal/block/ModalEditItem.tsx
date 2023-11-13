@@ -1,7 +1,6 @@
 /* VENDOR */
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
 
 /* APPLICATION */
 import { ModalHeader } from "../element/ModalHeader";
@@ -11,26 +10,23 @@ import { ModalTextarea } from "../element/ModalTextarea";
 import { ModalFooter } from "../element/ModalFooter";
 import { tasksUpdated } from "../../../redux/features/tasksSlice";
 import { categoriesUpdated } from "../../../redux/features/categoriesSlice";
-import { IListItem, ITask } from "../../../types/types";
-import { useModalActiv } from "../../../context/modal";
+import { IListItem } from "../../../types/types";
+import { useModalActiv } from "../../../context/modalView";
+import { useModalGetter, useModalInitial } from "../../../context/modalState";
+import { usePathFind } from "../../../hooks/usePathFind";
 
 export const ModalEditItem: React.FC<IListItem> = ({ item }) => {
   const dispatch = useDispatch();
-  const { pathname } = useLocation();
-  const isCategories = pathname.includes("categories");
-
-  const [inputFields, setInputFields] = useState<ITask>({
-    id: "",
-    name: "",
-    category: "",
-    description: "",
-  })
+  
+  const isCategories = usePathFind();
 
   const modalActiv = useModalActiv();
+  const modalState = useModalGetter();
+  const handleInput = useModalInitial(); 
 
   useEffect(() => {
     if (item) {
-      setInputFields((prev) => ({ ...prev, name: item.name, description: item.description, category: item.category }))
+      handleInput(item)
     }
   }, [item])
 
@@ -43,36 +39,24 @@ export const ModalEditItem: React.FC<IListItem> = ({ item }) => {
         }
       />
       {isCategories ? (
-        <ModalInput
-          name={inputFields.name}
-          setName={(e) => setInputFields((prev) => ({ ...prev, name: e }))}
-          size="large"
-        />) : (
-        <ModalRow
-          name={inputFields.name}
-          setName={(e) => setInputFields((prev) => ({ ...prev, name: e }))}
-          selected={inputFields.category}
-          setSelected={(e) => setInputFields((prev) => ({ ...prev, category: e }))}
-        />
+        <ModalInput size="large" />) : (
+        <ModalRow />
       )}
-      <ModalTextarea
-        description={inputFields.description}
-        setDescription={(e) => setInputFields((prev) => ({ ...prev, description: e }))}
-      />
+      <ModalTextarea />
       <ModalFooter
         setActive={() => modalActiv(null)}
         submitBtnText="Сохранить"
         size="large"
         onSubmit={() => {
-          if (!inputFields.name) return;
+          if (!modalState.name) return;
           if (isCategories) {
-            dispatch(categoriesUpdated({ id: item.id, name: inputFields.name, description: inputFields.description }))
+            dispatch(categoriesUpdated({ id: item.id, name: modalState.name, description: modalState.description }))
           } else {
             dispatch(tasksUpdated({
               id: item.id,
-              name: inputFields.name,
-              description: inputFields.description,
-              category: inputFields.category,
+              name: modalState.name,
+              description: modalState.description,
+              category: modalState.category,
             }))
           }
           modalActiv(null);

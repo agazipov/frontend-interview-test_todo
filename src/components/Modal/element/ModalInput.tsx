@@ -1,16 +1,16 @@
+import { useModalGetter, useModalSetter } from "../../../context/modalState";
 import important from "../../../icons/important.svg";
 
 interface ModalInputProps {
-  name: string | undefined;
-  setName: (e: string) => void;
   size?: string;
 }
 
 export const ModalInput: React.FC<ModalInputProps> = ({
-  name,
-  setName,
   size,
 }) => {
+  const handleInput = useModalSetter();
+  const modalState = useModalGetter();
+
   return (
     <div
       className={
@@ -21,8 +21,8 @@ export const ModalInput: React.FC<ModalInputProps> = ({
         id="modalinput"
         className="modalinput"
         placeholder="Введите имя задачи/категории"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        value={modalState.name}
+        onChange={(e) => handleInput({ type: "name", value: e.target.value })}
       />
       <img src={important} alt="important" className="modalinput-icon" />
       <label htmlFor="modalinput">Имя</label>

@@ -3,7 +3,7 @@ import React, {
   useContext,
   useState,
 } from "react";
-import { IContext, IWrapperTask } from "../types/types";
+import { IChildren, IWrapperTask } from "../types/types";
 
 const defaultValue = null;
 
@@ -18,7 +18,7 @@ export const useModalActiv = () => {
   return useContext(setterContext);
 };
 
-export const ModalContext: React.FC<IContext> = ({ children }) => {
+export const ModalContext: React.FC<IChildren> = ({ children }) => {
   const [isModal, setIsMobile] = useState<IWrapperTask | null>(defaultValue);
 
   const modalVisible = useCallback((payload: IWrapperTask | null) => {

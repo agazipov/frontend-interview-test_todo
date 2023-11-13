@@ -5,25 +5,20 @@ import { useSelector } from "react-redux";
 /* APPLICATION */
 import down from "../../../icons/down.svg";
 import { selectAllCategories } from "../../../redux/features/categoriesSlice";
+import { useModalGetter, useModalSetter } from "../../../context/modalState";
 
-interface ModalDropdownProps {
-  selected: string | undefined;
-  setSelected: (e: string | undefined) => void;
-}
-
-export const ModalDropdown: React.FC<ModalDropdownProps> = ({
-  selected,
-  setSelected,
+export const ModalDropdown = ({
 }) => {
   const [isActive, setIsActive] = useState(false);
   const options = useSelector(selectAllCategories);
-  
+  const handleInput = useModalSetter();
+  const modalState = useModalGetter();
 
   return (
     <div className="dropdown" onClick={() => setIsActive(!isActive)}>
       <span className="dropdown-label">Категория</span>
-      <div className={selected ? "dropdown-btn" : "dropdown-btn placeholder"}>
-        {options.find((option) => option.id === selected)?.name ||
+      <div className={modalState.category ? "dropdown-btn" : "dropdown-btn placeholder"}>
+        {options.find((option) => option.id === modalState.category)?.name ||
           "Выберите категорию"}
         <img src={down} alt="open dropdown" />
       </div>
@@ -33,7 +28,7 @@ export const ModalDropdown: React.FC<ModalDropdownProps> = ({
             <div
               className="dropdown-item"
               onClick={() => {              
-                setSelected(option.id);
+                handleInput({type: "select", value: option.id || ""})
                 setIsActive(false);
               }}
               key={option.id}

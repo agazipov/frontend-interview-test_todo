@@ -1,6 +1,5 @@
 /* VENDOR */
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
 
 /* APPLICATION */
 import { ModalHeader } from "../element/ModalHeader";
@@ -9,12 +8,12 @@ import { ModalFooter } from "../element/ModalFooter";
 import { tasksRemoved, tasksClearedCategories } from "../../../redux/features/tasksSlice";
 import { categoriesRemoved } from "../../../redux/features/categoriesSlice";
 import { IListItem } from "../../../types/types";
-import { useModalActiv } from "../../../context/modal";
+import { useModalActiv } from "../../../context/modalView";
+import { usePathFind } from "../../../hooks/usePathFind";
 
 export const ModalRemoveItem: React.FC<IListItem> = ({ item }) => {
   const dispatch = useDispatch();
-  const { pathname } = useLocation();
-  const isCategories = pathname.includes("categories");
+  const isCategories = usePathFind();
   const modalActiv = useModalActiv();
 
   return (

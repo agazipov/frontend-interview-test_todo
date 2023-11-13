@@ -21,7 +21,6 @@ export const tasksSlice = createSlice({
       state: Array<ITask>,
       action: PayloadAction<ITask>
     ) => {
-
       const { id, name, description, category } = action.payload;
 
       return state.forEach((element) => {

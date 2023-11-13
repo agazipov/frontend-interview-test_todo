@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import edit from "../../icons/edit.svg";
 import remove from "../../icons/remove.svg";
 import { selectAllCategories } from "../../redux/features/categoriesSlice";
-import { useModalActiv } from "../../context/modal";
+import { useModalActiv } from "../../context/modalView";
 import { IListItem } from "../../types/types";
 
 export const ListItem: React.FC<IListItem> = ({ item }) => {

@@ -9,7 +9,7 @@ import { store } from "./redux/store";
 import App from "./App";
 //import reportWebVitals from './reportWebVitals';
 import "./index.css";
-import { ModalContext } from "./context/modal";
+import { ModalContext } from "./context/modalView";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);

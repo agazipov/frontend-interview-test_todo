@@ -1,20 +1,15 @@
 /* VENDOR */
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 /* APPLICATION */
 import "./Header.css";
-import { useModalActiv } from "../../context/modal";
-import { ITask } from "../../types/types";
+import { useModalActiv } from "../../context/modalView";
+import { usePathFind } from "../../hooks/usePathFind";
+import { INITIAL_STATE } from "../../constant";
 
 export const Header = () => {
-  const { pathname } = useLocation();
-  const isCategories = pathname.includes("categories");
+  const isCategories = usePathFind();
   const modalActiv = useModalActiv();
-  const item: ITask = {
-    id:'',
-    name: '',
-    description: ''
-  }
 
   return (
     <header className="header">
@@ -43,7 +38,7 @@ export const Header = () => {
         <button
           className="header-button"
           onClick={() => {
-            modalActiv({type: 'create', item});
+            modalActiv({type: 'create', item: INITIAL_STATE});
           }}
         >
           {isCategories ? "Добавить категорию" : "Добавить задачу"}

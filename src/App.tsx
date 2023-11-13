@@ -7,7 +7,7 @@ import { Header } from "./components/Header/Header";
 import { Tasks } from "./components/Lists/Tasks";
 import { Categories } from "./components/Lists/Categories";
 import { ModalEditItem } from "./components/Modal/block/ModalEditItem";
-import { useIsModal } from "./context/modal";
+import { useIsModal } from "./context/modalView";
 import { ModalWrapper } from "./components/Modal/ModalWrapper";
 import { ModalCreateItem } from "./components/Modal/block/ModalCreateItem";
 import { ModalRemoveItem } from "./components/Modal/block/ModalRemoveItem";

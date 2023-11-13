@@ -3,10 +3,11 @@ import React from "react";
 
 /* APPLICATION */
 import "./Modal.css";
-import { useModalActiv } from "../../context/modal";
-import { IModalProps } from "../../types/types";
+import { useModalActiv } from "../../context/modalView";
+import { IChildren } from "../../types/types";
+import { ModalStateContext } from "../../context/modalState";
 
-export const ModalWrapper: React.FC<IModalProps> = ({
+export const ModalWrapper: React.FC<IChildren> = ({
   children,
 }) => {
   const modalActiv = useModalActiv();
@@ -18,7 +19,9 @@ export const ModalWrapper: React.FC<IModalProps> = ({
         onClick={() => modalActiv(null)}
       />
       <div className="modal__content">
-        {children}
+        <ModalStateContext>
+          {children}
+        </ModalStateContext>
       </div>
     </>
   );

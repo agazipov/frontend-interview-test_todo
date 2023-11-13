@@ -15,7 +15,8 @@ export const ModalFooter: React.FC<ModalFooterProps> = ({
 }) => {
   return (
     <div className="modal__content-footer">
-      <ModalBtn type="primary" size={size || ""} onClick={onSubmit}>
+      <ModalBtn 
+      type="primary" size={size || ""} onClick={onSubmit}>
         {submitBtnText}
       </ModalBtn>
       <ModalBtn

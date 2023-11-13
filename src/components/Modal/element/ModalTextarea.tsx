@@ -1,12 +1,9 @@
-interface ModalTextareaProps {
-  description: string;
-  setDescription: (e: string) => void;
-}
+import { useModalGetter, useModalSetter } from "../../../context/modalState";
 
-export const ModalTextarea: React.FC<ModalTextareaProps> = ({
-  description,
-  setDescription,
-}) => {
+export const ModalTextarea = () => {
+  const handleInput = useModalSetter();
+  const modalState = useModalGetter();
+
   return (
     <div className="modaltextarea-wrapper">
       <label htmlFor="modaltextarea">Описание</label>
@@ -14,8 +11,8 @@ export const ModalTextarea: React.FC<ModalTextareaProps> = ({
         id="modaltextarea"
         className="modaltextarea"
         placeholder="Введите описание задачи"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
+        value={modalState.description}
+        onChange={(e) => handleInput({ type: "description", value: e.target.value })}
       />
     </div>
   );
