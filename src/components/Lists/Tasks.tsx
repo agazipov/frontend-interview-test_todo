@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 /* APPLICATION */
 import { ListItem } from "./ListItem";
-import { selectAllTasks } from "../features/tasksSlice";
+import { selectAllTasks } from "../../redux/features/tasksSlice";
 
 export const Tasks: React.FC = () => {
   const tasks = useSelector(selectAllTasks);
@@ -17,4 +17,3 @@ export const Tasks: React.FC = () => {
   );
 };
 
-// можно попробовать вынести svg в отдельный файл в виде кода

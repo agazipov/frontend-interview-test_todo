@@ -5,10 +5,11 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 
 /* APPLICATION */
-import { store } from "./app/store";
+import { store } from "./redux/store";
 import App from "./App";
 //import reportWebVitals from './reportWebVitals';
 import "./index.css";
+import { ModalContext } from "./context/modalView";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -17,7 +18,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <ModalContext>
+          <App />
+        </ModalContext>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

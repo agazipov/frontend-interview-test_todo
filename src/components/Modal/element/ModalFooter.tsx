@@ -1,33 +1,29 @@
 import { ModalBtn } from "./ModalBtn";
 
 interface ModalFooterProps {
-  clearState?(): void;
-  setActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setActive: () => void;
   submitBtnText: string;
   size?: string;
   onSubmit: () => void;
 }
 
 export const ModalFooter: React.FC<ModalFooterProps> = ({
-  clearState,
   setActive,
   submitBtnText,
   size,
   onSubmit,
 }) => {
   return (
-    <footer className="modal__content-footer">
-      <ModalBtn type="primary" size={size || ""} onClick={onSubmit}>
+    <div className="modal__content-footer">
+      <ModalBtn 
+      type="primary" size={size || ""} onClick={onSubmit}>
         {submitBtnText}
       </ModalBtn>
       <ModalBtn
-        onClick={() => {
-          clearState && clearState();
-          setActive(false);
-        }}
+        onClick={setActive}
       >
         Закрыть
       </ModalBtn>
-    </footer>
+    </div>
   );
 };

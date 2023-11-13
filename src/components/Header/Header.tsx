@@ -1,15 +1,15 @@
 /* VENDOR */
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 /* APPLICATION */
 import "./Header.css";
-import { ModalCreateItem } from "../Modal/ModalCreateItem";
+import { useModalActiv } from "../../context/modalView";
+import { usePathFind } from "../../hooks/usePathFind";
+import { INITIAL_STATE } from "../../constant";
 
 export const Header = () => {
-  const { pathname } = useLocation(),
-    isCategories = pathname.includes("categories"),
-    [createModalActive, setCreateModalActive] = useState(false);
+  const isCategories = usePathFind();
+  const modalActiv = useModalActiv();
 
   return (
     <header className="header">
@@ -38,16 +38,12 @@ export const Header = () => {
         <button
           className="header-button"
           onClick={() => {
-            setCreateModalActive(true);
+            modalActiv({type: 'create', item: INITIAL_STATE});
           }}
         >
           {isCategories ? "Добавить категорию" : "Добавить задачу"}
         </button>
       </nav>
-      <ModalCreateItem
-        active={createModalActive}
-        setActive={setCreateModalActive}
-      />
     </header>
   );
 };
